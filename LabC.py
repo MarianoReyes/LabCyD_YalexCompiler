@@ -2,13 +2,9 @@ from Regex_Postfix import convertExpression
 from Postfix_AFN import PostifixToAFN
 import re
 
-numero_pattern = r'[0-9]+'
-letra_pattern = r'[a-zA-Z_]+'
-condicional_pattern = r'(if|else|while|for|switch|case)'
 
 # Concatenamos los patrones en una única expresión regular
-regex = '|'.join(
-    ['('+numero_pattern+')', '('+letra_pattern+')', '('+condicional_pattern+')'])
+regex = "0|1|2|3|4|5|6|7|8|9"
 
 # Creamos el automata a partir de la expresión regular
 conversion = convertExpression(len(regex))

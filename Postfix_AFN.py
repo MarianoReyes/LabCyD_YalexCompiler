@@ -44,7 +44,7 @@ class PostifixToAFN():
     def reemplazar_interrogacion(self):
         self.postfix = self.postfix.replace('?', 'ε?')
 
-    def conversion(self):
+    def conversion(self, indice):
         print("\nPostfix: ", self.postfix)
         self.reemplazar_interrogacion()
         print("\nConvirtiendo de Postfix a AFN...")
@@ -233,26 +233,9 @@ class PostifixToAFN():
         self.estados_list = ", ".join(self.estados_list)
 
         if self.error == False:
-
-            with open('afn.txt', 'a', encoding="utf-8") as f:
-                f.write("AFN  a partir de la Expresión Regular -->")
-                f.write("\n")
-                f.write("Símbolos: "+', '.join(simbolos))
-                f.write("\n")
-                f.write("Estados:  " + str(self.estados_list))
-                f.write("\n")
-                f.write("Estado inicial: { " + str(self.e0) + " }")
-                f.write("\n")
-                f.write("Estados de aceptación: { " + str(self.ef) + " }")
-                f.write("\n")
-                f.write("Transiciones: " + str(self.transiciones))
-                f.write("\n")
-                f.write(string_afn)
-
-            print("\nArchivo de AFN escrito con éxito")
-
-            # SI NO SE DESEA GRAFICAR POR PROBLEMAS CON LIBRERIA QUITAR LA LINEA SIGUIENTE
-            self.graficar('afn_grafico')  # imagen del AFN
+            nombre = 'afn_grafico_'+str(indice)
+            print(nombre)
+            self.graficar(nombre)  # imagen del AFN
         else:
             print("\nIngrese una expresión Regex válida")
 
