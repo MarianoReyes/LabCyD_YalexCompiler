@@ -23,9 +23,9 @@ for i in range(len(tokenizer.tokens)):
             tokenizer.tokens[i] = (
                 tokenizer.tokens[i][0], tokenizer.tokens[i][1], False)
 
-# por cada token en tokens creamos un afn
+counter = -1
+# por cada token en tokens creamos un afn si es simple
 for i, token in enumerate(tokenizer.tokens):
-    print('\n', i+1, token)
     if token[2] == True:
         try:
             # Creamos el automata a partir de la expresión regular
@@ -37,10 +37,12 @@ for i, token in enumerate(tokenizer.tokens):
                 postfix = conversion.res
 
                 # instancia de clase para convertir a AFN
-                afn = PostifixToAFN(postfix)
+                afn = PostifixToAFN(postfix, counter)
 
                 # llamada a metodo para convertir afn
                 afn.conversion(token[0])
+
+                counter = afn.counter
 
                 afns.append((token, afn))
 
@@ -65,9 +67,9 @@ for i, token in enumerate(tokenizer.tokens):
 
         new_tokens.append((token[0], new_regex, token[2]))
 
+print(counter)
 # por cada token compuesto en tokens creamos un afn
 for i, token in enumerate(new_tokens):
-    print('\n', i+1, token)
     if token[2] == False:
         try:
             # Creamos el automata a partir de la expresión regular
@@ -79,10 +81,12 @@ for i, token in enumerate(new_tokens):
                 postfix = conversion.res
 
                 # instancia de clase para convertir a AFN
-                afn = PostifixToAFN(postfix)
+                afn = PostifixToAFN(postfix, counter)
 
                 # llamada a metodo para convertir afn
                 afn.conversion(token[0])
+
+                counter = afn.counter
 
                 afns.append((token, afn))
 

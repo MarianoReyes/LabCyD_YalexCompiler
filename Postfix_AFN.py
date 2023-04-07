@@ -3,12 +3,13 @@ Postfix a AFN
 '''
 
 from re import S
+import re
 import pandas as pd
 from graphviz import Digraph
 
 
 class PostifixToAFN():
-    def __init__(self, postfix):
+    def __init__(self, postfix, counter):
         self.postfix = postfix
         self.estados = []
         self.estados_list = []
@@ -19,6 +20,7 @@ class PostifixToAFN():
         self.simbolos = []
         self.afn_final = []
         self.error = False
+        self.counter = counter
 
     def graficar(self, nombre):
         dot = Digraph()
@@ -58,48 +60,47 @@ class PostifixToAFN():
         self.simbolos = sorted(simbolos)
 
         stack = []
-        start = 0
-        end = 1
+        start = self.counter+1
+        end = self.counter+2
 
-        counter = -1
-        c1 = 0
-        c2 = 0
+        c1 = self.counter+1
+        c2 = self.counter+1
 
         # implementation del algoritmo de thompson
 
         for i in postfix:
             # si es un simbolo
             if i in simbolos:
-                counter = counter+1
-                c1 = counter
+                self.counter = self.counter+1
+                c1 = self.counter
                 if c1 not in self.estados:
                     self.estados.append(c1)
-                counter = counter+1
-                c2 = counter
+                self.counter = self.counter+1
+                c2 = self.counter
                 if c2 not in self.estados:
                     self.estados.append(c2)
                 self.afn_final.append({})
                 self.afn_final.append({})
                 stack.append([c1, c2])
-                self.afn_final[c1][i] = c2
+                #self.afn_final[c1][i] = c2
                 self.transiciones_splited.append([c1, i, c2])
             # si es un kleene
             elif i == '*':
                 try:
                     r1, r2 = stack.pop()
-                    counter = counter+1
-                    c1 = counter
+                    self.counter = self.counter+1
+                    c1 = self.counter
                     if c1 not in self.estados:
                         self.estados.append(c1)
-                    counter = counter+1
-                    c2 = counter
+                    self.counter = self.counter+1
+                    c2 = self.counter
                     if c2 not in self.estados:
                         self.estados.append(c2)
                     self.afn_final.append({})
                     self.afn_final.append({})
                     stack.append([c1, c2])
-                    self.afn_final[r2]['ε'] = (r1, c2)
-                    self.afn_final[c1]['ε'] = (r1, c2)
+                    #self.afn_final[r2]['ε'] = (r1, c2)
+                    #self.afn_final[c1]['ε'] = (r1, c2)
                     if start == r1:
                         start = c1
                     if end == r2:
@@ -115,16 +116,16 @@ class PostifixToAFN():
             elif i == '+':
                 try:
                     r1, r2 = stack.pop()
-                    counter = counter+1
-                    c1 = counter
+                    self.counter = self.counter+1
+                    c1 = self.counter
                     if c1 not in self.estados:
                         self.estados.append(c1)
-                    counter = counter+1
-                    c2 = counter
+                    self.counter = self.counter+1
+                    c2 = self.counter
                     if c2 not in self.estados:
                         self.estados.append(c2)
-                    self.afn_final.append({})
-                    self.afn_final.append({})
+                    # self.afn_final.append({})
+                    # self.afn_final.append({})
                     stack.append([c1, c2])
                     self.afn_final[r2]['ε'] = (r1, c2)
                     if start == r1:
@@ -144,7 +145,7 @@ class PostifixToAFN():
                     r11, r12 = stack.pop()
                     r21, r22 = stack.pop()
                     stack.append([r21, r12])
-                    self.afn_final[r22]['ε'] = r11
+                    #self.afn_final[r22]['ε'] = r11
                     if start == r11:
                         start = r21
                     if end == r22:
@@ -158,12 +159,12 @@ class PostifixToAFN():
             # si es un or
             elif i == "|":
                 try:
-                    counter = counter+1
-                    c1 = counter
+                    self.counter = self.counter+1
+                    c1 = self.counter
                     if c1 not in self.estados:
                         self.estados.append(c1)
-                    counter = counter+1
-                    c2 = counter
+                    self.counter = self.counter+1
+                    c2 = self.counter
                     if c2 not in self.estados:
                         self.estados.append(c2)
                     self.afn_final.append({})
@@ -172,9 +173,9 @@ class PostifixToAFN():
                     r11, r12 = stack.pop()
                     r21, r22 = stack.pop()
                     stack.append([c1, c2])
-                    self.afn_final[c1]['ε'] = (r21, r11)
-                    self.afn_final[r12]['ε'] = c2
-                    self.afn_final[r22]['ε'] = c2
+                    #self.afn_final[c1]['ε'] = (r21, r11)
+                    #self.afn_final[r12]['ε'] = c2
+                    #self.afn_final[r22]['ε'] = c2
                     if start == r11 or start == r21:
                         start = c1
                     if end == r22 or end == r12:
@@ -188,12 +189,12 @@ class PostifixToAFN():
                     print("\nExpresión Regex inválida, | mal aplicado")
             # si es un uno o cero ?
             elif i == "?":
-                counter = counter+1
-                c1 = counter
+                self.counter = self.counter+1
+                c1 = self.counter
                 if c1 not in self.estados:
                     self.estados.append(c1)
-                counter = counter+1
-                c2 = counter
+                self.counter = self.counter+1
+                c2 = self.counter
                 if c2 not in self.estados:
                     self.estados.append(c2)
                 self.afn_final.append({})
@@ -202,9 +203,9 @@ class PostifixToAFN():
                 r11, r12 = stack.pop()
                 r21, r22 = stack.pop()
                 stack.append([c1, c2])
-                self.afn_final[c1]['ε'] = (r21, r11)
-                self.afn_final[r12]['ε'] = c2
-                self.afn_final[r22]['ε'] = c2
+                #self.afn_final[c1]['ε'] = (r21, r11)
+                #self.afn_final[r12]['ε'] = c2
+                #self.afn_final[r22]['ε'] = c2
                 if start == r11 or start == r21:
                     start = c1
                 if end == r22 or end == r12:
