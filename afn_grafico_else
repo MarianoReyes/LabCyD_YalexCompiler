@@ -1,0 +1,17 @@
+digraph {
+	16 [shape=circle]
+	17 [shape=circle]
+	18 [shape=circle]
+	19 [shape=circle]
+	20 [shape=circle]
+	21 [shape=circle]
+	22 [shape=circle]
+	23 [shape=doublecircle]
+	16 -> 17 [label=e]
+	18 -> 19 [label=l]
+	17 -> 18 [label="ε"]
+	20 -> 21 [label=s]
+	19 -> 20 [label="ε"]
+	22 -> 23 [label=e]
+	21 -> 22 [label="ε"]
+}

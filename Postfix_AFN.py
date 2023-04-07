@@ -309,7 +309,7 @@ class PostifixToAFN():
         if isinstance(self.ef, list):
             for estado_final in self.ef:
                 if estado_final in estados_finales:
-                    return True
+                    return (True, estado_final)
             return False
         else:
             return self.ef in estados_finales
