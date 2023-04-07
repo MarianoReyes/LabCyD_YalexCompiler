@@ -27,6 +27,8 @@ for token in tokenizer.tokens:
     print(token)
 
 counter = -1
+errores = 0
+
 # por cada token en tokens creamos un afn si es simple
 for i, token in enumerate(tokenizer.tokens):
     if token[2] == True:
@@ -47,6 +49,9 @@ for i, token in enumerate(tokenizer.tokens):
 
                 counter = afn.counter
                 afns.append((token, afn))
+
+                if afn.error:
+                    errores += 1
 
         except:
             print('\nNo podemos generar ese afn aun')
@@ -88,8 +93,10 @@ for i, token in enumerate(new_tokens):
                 afn.conversion(token[0])
 
                 counter = afn.counter
-
                 afns.append((token, afn))
+
+                if afn.error:
+                    errores += 1
 
         except:
             print('\nNo podemos generar ese afn aun')
@@ -98,13 +105,17 @@ solo_afns = []
 for afn in afns:
     solo_afns.append(afn[1])
 
+print(solo_afns)
+
 # instancia de clase para convertir a AFN
 afn_final = PostifixToAFN(counter=counter, afns=solo_afns)
 
 # llamada a metodo para unir a todos los afns y graficarlos
-afn_final.union_afns("afn_grafico_mega_automata")
-
-counter = afn_final.counter
+if errores == 0:
+    afn_final.union_afns("afn_grafico_mega_automata")
+    counter = afn_final.counter
+else:
+    print("\nNo se genera el mega autómata porque 1 o más autómatas no se pudo generar.")
 
 print("\nPruebas para ver si cadenas son aceptadas...")
 print("1: ", afn_final.simular_cadena("1"))
