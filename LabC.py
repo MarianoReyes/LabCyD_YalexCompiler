@@ -89,6 +89,4 @@ for i, token in enumerate(new_tokens):
         except:
             print('\nNo podemos generar ese afn aun')
 
-print(tokenizer.tokens)
-print(new_tokens)
 print(afns)
