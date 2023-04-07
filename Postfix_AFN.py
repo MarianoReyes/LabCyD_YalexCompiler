@@ -9,26 +9,53 @@ from graphviz import Digraph
 
 
 class PostifixToAFN():
-    def __init__(self, postfix, counter):
+    def __init__(self, postfix=None, counter=None, afns=None):
         self.postfix = postfix
         self.estados = []
         self.estados_list = []
         self.e0 = None
-        self.ef = None
+        self.ef = []
         self.transiciones = []
         self.transiciones_splited = []
         self.simbolos = []
         self.afn_final = []
         self.error = False
         self.counter = counter
+        self.afns = afns
 
+    def union_afns(self, nombre):
+        print("\nJuntando todos los AFNs...")
+        self.counter = self.counter+1
+        self.e0 = self.counter
+        for afn in self.afns:
+            self.ef.append(afn.ef[0])
+            self.transiciones_splited = self.transiciones_splited + afn.transiciones_splited
+            self.estados = self.estados + afn.estados
+            self.transiciones_splited.append([self.e0, "ε", afn.e0])
+
+        dot = Digraph()
+        for estado in self.estados:
+            if estado in self.ef:
+                dot.node(str(estado), shape="doublecircle")
+            else:
+                dot.node(str(estado), shape="circle")
+        for transicion in self.transiciones_splited:
+            if transicion[1] == "ε":
+                dot.edge(str(transicion[0]), str(transicion[2]), label="ε")
+            else:
+                dot.edge(str(transicion[0]), str(
+                    transicion[2]), label=transicion[1])
+        dot.render(nombre, format='png', view=True)
+        print("\nMega_Autómata listo.")
+
+    # Método para graficar un AFN
     def graficar(self, nombre):
         dot = Digraph()
-        for i in range(len(self.estados)):
-            if self.estados[i] == self.ef:
-                dot.node(str(self.estados[i]), shape="doublecircle")
+        for estado in self.estados:
+            if estado in self.ef:
+                dot.node(str(estado), shape="doublecircle")
             else:
-                dot.node(str(self.estados[i]), shape="circle")
+                dot.node(str(estado), shape="circle")
         for transicion in self.transiciones_splited:
             if transicion[1] == "ε":
                 dot.edge(str(transicion[0]), str(transicion[2]), label="ε")
@@ -217,7 +244,7 @@ class PostifixToAFN():
 
         # asignacion de estados finales e iniciales
         self.e0 = start
-        self.ef = end
+        self.ef.append(end)
 
         # Guardar variables para impresión
         df = pd.DataFrame(self.afn_final)
@@ -236,6 +263,7 @@ class PostifixToAFN():
         if self.error == False:
             nombre = 'afn_grafico_'+str(indice)
             self.graficar(nombre)  # imagen del AFN
+            print("\nConversión de Postfix a AFN lista.")
         else:
             print("\nIngrese una expresión Regex válida")
 
@@ -278,4 +306,10 @@ class PostifixToAFN():
                 return False
             estados_actuales = self.cerradura_epsilon(nuevos_estados)
         estados_finales = self.cerradura_epsilon(estados_actuales)
-        return self.ef in estados_finales
+        if isinstance(self.ef, list):
+            for estado_final in self.ef:
+                if estado_final in estados_finales:
+                    return True
+            return False
+        else:
+            return self.ef in estados_finales

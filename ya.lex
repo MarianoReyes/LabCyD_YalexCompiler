@@ -1,13 +1,13 @@
 (* Ejemplo básico *)
 
-let digito = "0|1|2"
+let digito = "2|1"
 let numero = "digito(digito)*"
-let letra = "a|b|c"
+let letra = "a|b"
 let identificador = "letra(letra|digito)*"
 
 rule tokens =
   identificador	{ print("Identificador\n") }
+  | digito			{ print("Dígito\n") }
+  | letra			{ print("Letra\n") }
   | numero			{ print("Número\n") }
-  | '+'				{ print("Operador de suma\n") }
-  | '*'				{ print("Operador de multiplicación\n") }
-  | '='				{ print("Operador de asignación\n") }
+

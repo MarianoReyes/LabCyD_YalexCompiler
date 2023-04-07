@@ -1,0 +1,14 @@
+digraph {
+	6 [shape=circle]
+	7 [shape=circle]
+	8 [shape=circle]
+	9 [shape=circle]
+	10 [shape=circle]
+	11 [shape=doublecircle]
+	6 -> 7 [label=a]
+	8 -> 9 [label=b]
+	10 -> 6 [label="ε"]
+	10 -> 8 [label="ε"]
+	9 -> 11 [label="ε"]
+	7 -> 11 [label="ε"]
+}

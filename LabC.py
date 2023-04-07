@@ -37,13 +37,12 @@ for i, token in enumerate(tokenizer.tokens):
                 postfix = conversion.res
 
                 # instancia de clase para convertir a AFN
-                afn = PostifixToAFN(postfix, counter)
+                afn = PostifixToAFN(postfix=postfix, counter=counter)
 
                 # llamada a metodo para convertir afn
                 afn.conversion(token[0])
 
                 counter = afn.counter
-
                 afns.append((token, afn))
 
         except:
@@ -67,7 +66,6 @@ for i, token in enumerate(tokenizer.tokens):
 
         new_tokens.append((token[0], new_regex, token[2]))
 
-print(counter)
 # por cada token compuesto en tokens creamos un afn
 for i, token in enumerate(new_tokens):
     if token[2] == False:
@@ -81,7 +79,7 @@ for i, token in enumerate(new_tokens):
                 postfix = conversion.res
 
                 # instancia de clase para convertir a AFN
-                afn = PostifixToAFN(postfix, counter)
+                afn = PostifixToAFN(postfix=postfix, counter=counter)
 
                 # llamada a metodo para convertir afn
                 afn.conversion(token[0])
@@ -93,4 +91,21 @@ for i, token in enumerate(new_tokens):
         except:
             print('\nNo podemos generar ese afn aun')
 
-print(afns)
+solo_afns = []
+for afn in afns:
+    solo_afns.append(afn[1])
+
+# instancia de clase para convertir a AFN
+afn_final = PostifixToAFN(counter=counter, afns=solo_afns)
+
+# llamada a metodo para unir a todos los afns y graficarlos
+afn_final.union_afns("afn_grafico_mega_automata")
+
+counter = afn_final.counter
+
+print("\nPruebas para ver si cadenas son aceptadas...")
+print("1: ", afn_final.simular_cadena("1"))
+print("12: ", afn_final.simular_cadena("12"))
+print("123: ", afn_final.simular_cadena("123"))
+print("a: ", afn_final.simular_cadena("a"))
+print("aab: ", afn_final.simular_cadena("aab"))
