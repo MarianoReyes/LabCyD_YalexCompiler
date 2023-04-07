@@ -23,6 +23,9 @@ for i in range(len(tokenizer.tokens)):
             tokenizer.tokens[i] = (
                 tokenizer.tokens[i][0], tokenizer.tokens[i][1], False)
 
+for token in tokenizer.tokens:
+    print(token)
+
 counter = -1
 # por cada token en tokens creamos un afn si es simple
 for i, token in enumerate(tokenizer.tokens):
