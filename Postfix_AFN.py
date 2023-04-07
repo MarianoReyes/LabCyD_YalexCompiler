@@ -234,7 +234,6 @@ class PostifixToAFN():
 
         if self.error == False:
             nombre = 'afn_grafico_'+str(indice)
-            print(nombre)
             self.graficar(nombre)  # imagen del AFN
         else:
             print("\nIngrese una expresión Regex válida")
