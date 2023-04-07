@@ -2,9 +2,9 @@
 
 let if = "if"
 let else = "else"
-let digito = "2|1"
+let digito = "1|2|3"
 let numero = "digito(digito)*"
-let letra = "a|b"
+let letra = "a|b|c|d|e"
 let identificador = "letra(letra|digito)*"
 
 rule tokens =

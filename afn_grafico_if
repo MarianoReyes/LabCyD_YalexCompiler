@@ -1,0 +1,9 @@
+digraph {
+	28 [shape=circle]
+	29 [shape=circle]
+	30 [shape=circle]
+	31 [shape=doublecircle]
+	28 -> 29 [label=i]
+	30 -> 31 [label=f]
+	29 -> 30 [label="ε"]
+}
