@@ -1,0 +1,17 @@
+digraph {
+	166 [shape=circle]
+	167 [shape=circle]
+	168 [shape=circle]
+	169 [shape=circle]
+	170 [shape=circle]
+	171 [shape=circle]
+	172 [shape=circle]
+	173 [shape=doublecircle]
+	166 -> 167 [label=c]
+	168 -> 169 [label=a]
+	167 -> 168 [label="ε"]
+	170 -> 171 [label=s]
+	169 -> 170 [label="ε"]
+	172 -> 173 [label=e]
+	171 -> 172 [label="ε"]
+}

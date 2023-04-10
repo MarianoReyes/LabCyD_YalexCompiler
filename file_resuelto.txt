@@ -1,0 +1,16 @@
+variable   + 5 *	if else 342	-11 = otraVariable + 2
+variable3
+
+'variable' --> IDENTIFICADOR
+'+' --> No se reconoce
+'5' --> DIGITO
+'*' --> No se reconoce
+'if' --> IF
+'else' --> ELSE
+'342' --> NUMERO
+'-11' --> NUMERO
+'=' --> IGUAL
+'otraVariable' --> No se reconoce
+'+' --> No se reconoce
+'2' --> DIGITO
+'variable3' --> IDENTIFICADOR

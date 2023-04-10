@@ -65,7 +65,7 @@ class PostifixToAFN():
         dot.render(nombre, format='png', view=True)
 
     def operando(self, caracter):
-        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε"):
+        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε" or caracter == "-" or caracter == "="):
             return True
         else:
             return False
@@ -74,9 +74,7 @@ class PostifixToAFN():
         self.postfix = self.postfix.replace('?', 'ε?')
 
     def conversion(self, indice):
-        print("\nPostfix: ", self.postfix)
         self.reemplazar_interrogacion()
-        print("\nConvirtiendo de Postfix a AFN...")
         simbolos = []
         postfix = self.postfix
         for i in postfix:
@@ -263,7 +261,6 @@ class PostifixToAFN():
         if self.error == False:
             nombre = 'afn_grafico_'+str(indice)
             self.graficar(nombre)  # imagen del AFN
-            print("\nConversión de Postfix a AFN lista.")
         else:
             print("\nIngrese una expresión Regex válida")
 

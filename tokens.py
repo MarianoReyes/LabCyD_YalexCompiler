@@ -13,7 +13,7 @@ class Tokens():
             lines = f.readlines()
 
             # Expresión regular para extraer el nombre y la expresión regular de cada token
-            token_regex = r'let\s+([a-zA-Z0-9]+)\s+=\s+"(.*)"'
+            token_regex = r'let\s+([a-zA-Z0-9_-]+)\s+=\s+"([^"]*)"'
 
         # Recorrer todas las líneas del archivo
         for line in lines:

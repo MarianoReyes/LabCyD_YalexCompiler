@@ -2,7 +2,7 @@
 
 let if = "if"
 let else = "else"
-let digito = "1|2|3"
+let digito = "1|2|3|4"
 let numero = "digito(digito)*"
 let letra = "a|b|c|d|e"
 let identificador = "letra(letra|digito)*"
