@@ -100,7 +100,6 @@ class convertExpression:
 
     # Funcion principal que retorna la expresion regular a postfix
     def RegexToPostfix(self, exp):
-        print("\nConvirtiendo Regex a Postfix...")
         self.ver = self.verificar_par(exp)
         if self.ver == True:
             exp = self.addPuntos(exp)

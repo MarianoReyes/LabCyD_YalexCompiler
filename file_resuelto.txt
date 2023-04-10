@@ -1,5 +1,5 @@
 variable   + 5 *	if else 342	-11 = otraVariable + 2
-variable3
+variable3 4F
 
 'variable' --> IDENTIFICADOR
 '+' --> No se reconoce
@@ -14,3 +14,4 @@ variable3
 '+' --> No se reconoce
 '2' --> DIGITO
 'variable3' --> IDENTIFICADOR
+'4F' --> NUMERO_HEXADECIMAL

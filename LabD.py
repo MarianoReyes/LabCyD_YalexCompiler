@@ -9,6 +9,8 @@ archivo = 'ya_final.lex'
 # creacion de la variable que almacena afns con su nombre
 afns = []
 
+print("\nCreando tokens...")
+
 # a los tokens del archivo los covertimos en arreglo
 tokenizer = Tokens()
 tokenizer.getTokens(archivo)
@@ -25,6 +27,8 @@ for i in range(len(tokenizer.tokens)):
 
 counter = -1
 errores = 0
+
+print("\nCreando afns...")
 
 # por cada token en tokens creamos un afn si es simple
 for i, token in enumerate(tokenizer.tokens):
@@ -97,6 +101,8 @@ for i, token in enumerate(new_tokens):
 
         except:
             print('\nNo podemos generar ese afn aun')
+
+print("\nAfns listos...")
 
 solo_afns = []
 for afn in afns:
