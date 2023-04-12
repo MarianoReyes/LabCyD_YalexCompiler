@@ -65,7 +65,7 @@ class PostifixToAFN():
         dot.render(nombre, format='png', view=True)
 
     def operando(self, caracter):
-        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε" or caracter == "-" or caracter == "="):
+        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε" or caracter == "-" or caracter == "=" or caracter == "^"):
             return True
         else:
             return False
