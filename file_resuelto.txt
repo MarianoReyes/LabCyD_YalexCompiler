@@ -1,5 +1,5 @@
 variable   + 5 *	if else 342	-11 = otraVariable + 2
-variable3 4F
+variable3 4F 32.23
 
 'variable' --> IDENTIFICADOR
 '+' --> No se reconoce
@@ -15,3 +15,4 @@ variable3 4F
 '2' --> DIGITO
 'variable3' --> IDENTIFICADOR
 '4F' --> NUMERO_HEXADECIMAL
+'32.23' --> NUMERO_FLOTANTE

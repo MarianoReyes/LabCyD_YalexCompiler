@@ -11,35 +11,35 @@ class convertExpression:
         # This array is used a stack
         self.array = []
         # precedencia setting
-        self.precedencia = {'|': 1, '.': 1, '?': 2, '*': 2, '+': 2}
+        self.precedencia = {'|': 1, '^': 1, '?': 2, '*': 2, '+': 2}
         # Aqui se almacena el resultado final
         self.output = []
         self.res = ""
 
     # funcion para añadir puntos
     def addPuntos(self, regex):
-        simbolos = [".", "|", "?", "*", "+", "(", ")"]
+        simbolos = ["^", "|", "?", "*", "+", "(", ")"]
         length = len(regex)
         new_regex = []
         for i in range(length-1):
             new_regex.append(regex[i])
             if regex[i] not in simbolos:
                 if regex[i+1] not in simbolos or regex[i+1] == '(':
-                    new_regex += "."
+                    new_regex += "^"
             if regex[i] == ")" and regex[i+1] == "(":
-                new_regex += "."
+                new_regex += "^"
             if regex[i] == "*" and regex[i+1] == "(":
-                new_regex += "."
+                new_regex += "^"
             if regex[i] == "?" and regex[i+1] == "(":
-                new_regex += "."
+                new_regex += "^"
             if regex[i] == ")" and regex[i+1] not in simbolos:
-                new_regex += "."
+                new_regex += "^"
             if regex[i] == "*" and regex[i+1] not in simbolos:
-                new_regex += "."
+                new_regex += "^"
             if regex[i] == "+" and regex[i+1] not in simbolos:
-                new_regex += "."
+                new_regex += "^"
             if regex[i] == "?" and regex[i+1] not in simbolos:
-                new_regex += "."
+                new_regex += "^"
         new_regex += regex[length-1]
 
         return "".join(new_regex)

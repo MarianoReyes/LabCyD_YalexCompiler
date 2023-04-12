@@ -1,0 +1,5 @@
+digraph {
+	40 [shape=circle]
+	41 [shape=doublecircle]
+	40 -> 41 [label="."]
+}

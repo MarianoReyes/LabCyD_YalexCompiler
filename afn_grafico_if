@@ -1,9 +1,9 @@
 digraph {
-	142 [shape=circle]
-	143 [shape=circle]
 	144 [shape=circle]
-	145 [shape=doublecircle]
-	142 -> 143 [label=i]
-	144 -> 145 [label=f]
-	143 -> 144 [label="ε"]
+	145 [shape=circle]
+	146 [shape=circle]
+	147 [shape=doublecircle]
+	144 -> 145 [label=i]
+	146 -> 147 [label=f]
+	145 -> 146 [label="ε"]
 }

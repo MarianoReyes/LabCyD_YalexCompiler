@@ -65,7 +65,7 @@ class PostifixToAFN():
         dot.render(nombre, format='png', view=True)
 
     def operando(self, caracter):
-        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε" or caracter == "-" or caracter == "=" or caracter == "^"):
+        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε" or caracter == "-" or caracter == "=" or caracter == "."):
             return True
         else:
             return False
@@ -165,7 +165,7 @@ class PostifixToAFN():
                     print("\nExpresión Regex inválida, + mal aplicado")
 
             # si es una concatenacion
-            elif i == '.':
+            elif i == '^':
                 try:
                     r11, r12 = stack.pop()
                     r21, r22 = stack.pop()

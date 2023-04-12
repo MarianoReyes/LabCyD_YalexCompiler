@@ -21,9 +21,6 @@ class Tokens():
         # Almacena las variables en una lista
         variables = list(matches)
 
-        # Imprime la lista de variables
-        print(variables)
-
         with open(archivo, 'r') as f:
             # Leer todas las líneas del archivo
             lines = f.readlines()
