@@ -7,7 +7,23 @@ class Tokens():
         self.tokens = []
 
     def getTokens(self, archivo):
-        # Abrir el archivo YALex.txt
+        # Abre el archivo y lee todo su contenido
+        import re
+
+        # Abre el archivo 'ya.lex' en modo de lectura
+        with open(archivo, 'r') as f:
+            # Lee todo el contenido del archivo
+            content = f.read()
+
+        # Encuentra todas las variables que aparecen después de la línea "rule tokens ="
+        matches = re.findall(r'\s*(\w+)\s*{', content)
+
+        # Almacena las variables en una lista
+        variables = list(matches)
+
+        # Imprime la lista de variables
+        print(variables)
+
         with open(archivo, 'r') as f:
             # Leer todas las líneas del archivo
             lines = f.readlines()
@@ -24,4 +40,5 @@ class Tokens():
                 name = match.group(1)
                 regex = match.group(2)
                 # Agregar el token a la lista de tokens
-                self.tokens.append((name, regex))
+                if name in variables:
+                    self.tokens.append((name, regex))
