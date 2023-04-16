@@ -1,3 +1,4 @@
+import pickle
 import re
 from tokens import Tokens
 from Regex_Postfix import convertExpression
@@ -119,8 +120,38 @@ else:
     print("\nNo se genera el mega autómata porque 1 o más autómatas no se pudo generar.")
 
 # LAB D DESDE AQUI
+
+
+# convertir objetos a bytes
+afns_bytes = pickle.dumps(afns)
+afn_final_bytes = pickle.dumps(afn_final)
+
+# guardar bytes en archivos binarios
+with open('afns.pkl', 'wb') as f:
+    f.write(afns_bytes)
+with open('afn_final.pkl', 'wb') as f:
+    f.write(afn_final_bytes)
+
+
+imports = '''
+# -*- coding: utf-8 -*-
+from Postfix_AFN import PostifixToAFN 
+import pickle
+'''
+codigo = '''
+# cargar bytes desde archivos binarios
+with open('afns.pkl', 'rb') as f:
+    afns_bytes = f.read()
+with open('afn_final.pkl', 'rb') as f:
+    afn_final_bytes = f.read()
+
+# convertir bytes a objetos
+afns = pickle.loads(afns_bytes)
+afn_final = pickle.loads(afn_final_bytes)
+
 palabras = []
-with open('file.txt', 'r') as f:
+archivo = input("Ingrese el nombre del archivo a resolver:\\n--> ") 
+with open(archivo, 'r') as f:
     contenido = f.read()
     palabras = contenido.split()
 
@@ -140,10 +171,16 @@ for palabra in palabras:
     except:
         pass
 
-# Escribir el resultado en el archivo2.txt
+# Escribir el resultado en el .txt
 with open('file_resuelto.txt', 'w') as f:
     f.write(contenido)
-    f.write('\n\n')
+    f.write('\\n\\n')
     for resultado in resultado_verificaciones:
         f.write(resultado)
-        f.write('\n')
+        f.write('\\n')
+
+print("\\nArchivo resuelto con exito")
+'''
+with open('compilado.py', 'w') as archivo:
+    archivo.write(imports)
+    archivo.write(codigo)
