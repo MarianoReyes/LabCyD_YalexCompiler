@@ -1,9 +1,0 @@
-digraph {
-	144 [shape=circle]
-	145 [shape=circle]
-	146 [shape=circle]
-	147 [shape=doublecircle]
-	144 -> 145 [label=i]
-	146 -> 147 [label=f]
-	145 -> 146 [label="ε"]
-}

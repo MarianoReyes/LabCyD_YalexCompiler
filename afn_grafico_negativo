@@ -1,5 +1,0 @@
-digraph {
-	38 [shape=circle]
-	39 [shape=doublecircle]
-	38 -> 39 [label="-"]
-}
