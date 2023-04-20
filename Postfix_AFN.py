@@ -65,7 +65,8 @@ class PostifixToAFN():
         dot.render(nombre, format='png', view=True)
 
     def operando(self, caracter):
-        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε" or caracter == "-" or caracter == "=" or caracter == "." or caracter == "^" or caracter == "+" or caracter == "*" or caracter == "\""):
+        operandos_validos = ['ε', '-', '=', '.', '^', '+', '*', '"']
+        if caracter.isalpha() or caracter.isnumeric() or caracter in operandos_validos:
             return True
         else:
             return False
@@ -75,6 +76,7 @@ class PostifixToAFN():
 
     def conversion(self, indice):
         self.reemplazar_interrogacion()
+        print(self.postfix)
         simbolos = []
         postfix = self.postfix
         for i in postfix:
