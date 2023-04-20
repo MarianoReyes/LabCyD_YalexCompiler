@@ -137,6 +137,7 @@ imports = '''
 # -*- coding: utf-8 -*-
 from Postfix_AFN import PostifixToAFN 
 import pickle
+import re
 '''
 codigo = '''
 # cargar bytes desde archivos binarios
@@ -151,9 +152,14 @@ afn_final = pickle.loads(afn_final_bytes)
 
 palabras = []
 archivo = input("Ingrese el nombre del archivo a resolver:\\n--> ") 
+
 with open(archivo, 'r') as f:
     contenido = f.read()
-    palabras = contenido.split()
+    
+    # Utilizamos una expresión regular para hacer el split
+    patron = re.compile(r'"[^"]*"|\S+')
+    palabras = patron.findall(contenido)
+
 
 resultado_verificaciones = []
 for palabra in palabras:
