@@ -5,7 +5,7 @@ from Regex_Postfix import convertExpression
 from Postfix_AFN import PostifixToAFN
 
 # variable del archivo
-archivo = 'ya1.lex'
+archivo = input("Ingrese el archivo lex:\n--> ")
 
 # creacion de la variable que almacena afns con su nombre
 afns = []

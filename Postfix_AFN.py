@@ -75,7 +75,6 @@ class PostifixToAFN():
 
     def conversion(self, indice):
         self.reemplazar_interrogacion()
-        print("\n", self.postfix)
         simbolos = []
         postfix = self.postfix
         for i in postfix:
