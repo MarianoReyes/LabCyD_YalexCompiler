@@ -163,8 +163,14 @@ with open(archivo, 'r') as f:
     palabras = patron.findall(contenido)
 
 
+def reemplazar_espacios(value):
+    value = value.replace(' ', ',')
+    return value
+
+
 resultado_verificaciones = []
 for palabra in palabras:
+    palabra = reemplazar_espacios(palabra)
     valor = afn_final.simular_cadena(palabra)
     try:
         if valor == False:

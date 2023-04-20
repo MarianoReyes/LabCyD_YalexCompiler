@@ -10,7 +10,8 @@ let for = for
 let letra = a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z
 let identificador = letra(letra|digito)@(x|y|z)
 let comilla = "
-let cadena = comilla(letra)@comilla
+let espacio = ,
+let cadena = comilla(letra|digito|espacio)@comilla
 
 rule tokens =
   digito			{ print("digito\n") }
@@ -23,5 +24,6 @@ rule tokens =
   | letra			{ print("letra\n") }
   | identificador	{ print("identificador\n") }
   | comilla	{ print("comilla\n") }
+  | espacio	{ print("espacio\n") }
   | cadena	{ print("cadena\n") }
 
