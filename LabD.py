@@ -5,7 +5,7 @@ from Regex_Postfix import convertExpression
 from Postfix_AFN import PostifixToAFN
 
 # variable del archivo
-archivo = 'ya_final.lex'
+archivo = 'ya1.lex'
 
 # creacion de la variable que almacena afns con su nombre
 afns = []
@@ -65,7 +65,7 @@ for i, token in enumerate(tokenizer.tokens):
         new_tokens.append((token[0], token[1], token[2]))
     if not token[2]:
         operands_operators = []
-        regex_splitted = re.findall('\w+|[+*?()|.\-=]', token[1])
+        regex_splitted = re.findall('\w+|[?()|\-=@#%+*]', token[1])
         operands_operators.extend(regex_splitted)
 
         for i, element in enumerate(operands_operators):
@@ -171,8 +171,9 @@ for palabra in palabras:
     except:
         pass
 
+new_archivo = input("\\nIngrese el nombre del archivo nuevo:\\n--> ") 
 # Escribir el resultado en el .txt
-with open('file_resuelto.txt', 'w') as f:
+with open(new_archivo, 'w') as f:
     f.write(contenido)
     f.write('\\n\\n')
     for resultado in resultado_verificaciones:

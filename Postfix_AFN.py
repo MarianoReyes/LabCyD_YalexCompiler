@@ -65,7 +65,7 @@ class PostifixToAFN():
         dot.render(nombre, format='png', view=True)
 
     def operando(self, caracter):
-        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε" or caracter == "-" or caracter == "=" or caracter == "."):
+        if(caracter.isalpha() or caracter.isnumeric() or caracter == "ε" or caracter == "-" or caracter == "=" or caracter == "." or caracter == "^" or caracter == "+" or caracter == "*"):
             return True
         else:
             return False
@@ -75,6 +75,7 @@ class PostifixToAFN():
 
     def conversion(self, indice):
         self.reemplazar_interrogacion()
+        print("\n", self.postfix)
         simbolos = []
         postfix = self.postfix
         for i in postfix:
@@ -110,7 +111,7 @@ class PostifixToAFN():
                 #self.afn_final[c1][i] = c2
                 self.transiciones_splited.append([c1, i, c2])
             # si es un kleene
-            elif i == '*':
+            elif i == '@':
                 try:
                     r1, r2 = stack.pop()
                     self.counter = self.counter+1
@@ -138,7 +139,7 @@ class PostifixToAFN():
                     self.error = True
                     print("\nExpresión Regex inválida, * mal aplicado")
             # si es una cerradura positiva
-            elif i == '+':
+            elif i == '#':
                 try:
                     r1, r2 = stack.pop()
                     self.counter = self.counter+1
@@ -165,7 +166,7 @@ class PostifixToAFN():
                     print("\nExpresión Regex inválida, + mal aplicado")
 
             # si es una concatenacion
-            elif i == '^':
+            elif i == '%':
                 try:
                     r11, r12 = stack.pop()
                     r21, r22 = stack.pop()
